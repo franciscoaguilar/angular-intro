@@ -12,26 +12,49 @@ import { CONTACTS } from '../mocks/mock-contacts';
 export class ContactComponent implements OnInit {
 
   contacts: ContactInterface[];
-  editedContact: ContactInterface;
+  editedContact: ContactInterface = new Contact();
+  filter = '';
+  shouldReverse = false;
 
   constructor() { }
 
-  getContacts(filter: String ){
-    if (filter === 'all')  { this.contacts = CONTACTS; } else{
-    let filteredContacts = [];
-    const contacts: any = CONTACTS;
-    contacts.find((contact) => {
-      if(contact.tags.includes(filter)) {
-        filteredContacts.push(contact);
-      }
-    });
-    this.contacts = filteredContacts;
+  getContacts(filter: String) {
+    if (filter === 'all') { this.contacts = CONTACTS; } else {
+      const filteredContacts = [];
+      const contacts: any = CONTACTS;
+      contacts.find((contact) => {
+        if (contact.tags.includes(filter)) {
+          filteredContacts.push(contact);
+        }
+      });
+      this.contacts = filteredContacts;
+    }
+  }
+
+  getEditedContact(contact) {
+    this.editedContact = contact;
+  }
+
+  toggleDeleteContact(contact){
+    contact.isDeleted = !contact.isDeleted;
+  }
+deleteContact(contact){
+  const remove: number = this.contacts.indexOf(contact);
+  if(remove != -1){
+    this.contacts.splice(remove, 1);
   }
 }
-getEditedContact(contact){
-this.editedContact = contact;
+
+get filterBy() {
+  return this.filter;
+}
+changeFilterBy(filter: string) {
+  this.filter = filter;
+  this.shouldReverse = false;
 }
 
+get isReversed() { return this.shouldReverse; }
+toggleReverse() { this.shouldReverse = !this.shouldReverse; }
   ngOnInit() {
     this.getContacts('all');
   }
