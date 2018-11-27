@@ -1,3 +1,6 @@
 .completed{
   text-decoration: line-through;
 }
+.badge-padding{
+  margin-right: 4px;
+}
