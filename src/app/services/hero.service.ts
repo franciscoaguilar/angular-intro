@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from ''
+import { Router } from '@angular/router';
 
 import { HEROES } from '../mocks/mock-heroes';
 import { HeroInterface } from '../interfaces/hero-interface';
@@ -7,7 +7,7 @@ import { HeroInterface } from '../interfaces/hero-interface';
 
 @Injectable({
   providedIn: 'root'
-});
+})
 export class HeroService {
 
   constructor(private router: Router) { }
@@ -31,10 +31,8 @@ filterHeroes(powerFilter: string, hero: HeroInterface ){
     if(!selectedHero) { this.heroNotFound(id); }
     return selectedHero;
 
-  });
-}
-
-heroNotFound(noHero: string){
-  return this.router.navigateByUrl(`/hero-not-found/${noHero}`);
-}
+  };
+  heroNotFound(noHero: number){
+    return this.router.navigateByUrl(`/hero-not-found/${noHero}`);
+  }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AmiiboInterface } from '../interfaces/amiibo-interface';
+// import { AmiiboInterface } from '../interfaces/amiibo-interface';
 import  { ApiService } from './api.service';
 
 @Injectable({
@@ -11,6 +11,6 @@ export class AmiiboService {
   constructor(private api: ApiService) { }
 
   getAmiibos() {
-    return this.api.get<AmiiboInterface[]>('/amiibo');
+    return this.api.get('/amiibo');
   }
 }
